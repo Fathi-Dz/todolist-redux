@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "./todoListSlice";
+import { addTodo } from "./ToDoSlice";
 import { useNavigate } from "react-router-dom";
 
 export default function AddTodo() {

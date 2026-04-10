@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeTodo } from "./todoListSlice";
+import { removeTodo } from "./ToDoSlice";
 
 export default function ListTodo() {
   const todos = useSelector((state) => state.todoList);
