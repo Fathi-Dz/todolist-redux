@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ListTodo from "./ListTodo.jsx";
 import AddTodo from "./AddTodo.jsx";
 import UpdateTodo from "./UpdateTodo.jsx";
-import todoListReducer from "./todoListSlice.js";
+import todoListReducer from "./ToDoSlice.js";
 
 const store = configureStore({
   reducer: {
