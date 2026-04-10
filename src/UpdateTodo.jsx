@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTodo } from "./ToDoSliceSlice";
+import { updateTodo } from "./ToDoSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdateTodo() {
