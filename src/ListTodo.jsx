@@ -1,59 +1,47 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { removeTodo } from "./ToDoSlice";
+import { useSelector, useDispatch } from 'react-redux';
+import { removeTodo } from './ToDoSlice';
+import { Link } from 'react-router-dom';
 
-export default function ListTodo() {
-  const todos = useSelector((state) => state.todoList);
+const ListTodo = () => {
+  const siswa = useSelector((state) => state.siswa.listSiswa);
   const dispatch = useDispatch();
 
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this todo?")) {
-      dispatch(removeTodo({ id }));
-    }
-  };
-
   return (
-    <div>
-      <h1>List Todo</h1>
-
-      <Link to="/todolist/add">Add Todo</Link>
-
-      <table border="1" cellPadding="8">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Class</th>
-            <th>Region</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {todos.length === 0 ? (
+    <div className="container">
+      <h1>👨‍🎓 Manajemen Siswa</h1>
+      <div style={{ marginBottom: '20px' }}>
+        <Link to="/add" className="btn btn-primary">+ Tambah Siswa</Link>
+      </div>
+      
+      <div className="table-container">
+        <table>
+          <thead>
             <tr>
-              <td colSpan="5">No todos available</td>
+              <th>Nama</th>
+              <th>Alamat</th>
+              <th>Kelas</th>
+              <th style={{ textAlign: 'center' }}>Aksi</th>
             </tr>
-          ) : (
-            todos.map((todo) => (
-              <tr key={todo.id}>
-                <td>{todo.id}</td>
-                <td>{todo.name}</td>
-                <td>{todo.class}</td>
-                <td>{todo.region}</td>
-                <td>
-                  <Link to={`/todolist/${todo.id}/edit`}>
-                    Update
-                  </Link>{" "}
-                  <button onClick={() => handleDelete(todo.id)}>
-                    Delete
+          </thead>
+          <tbody>
+            {siswa.map((s) => (
+              <tr key={s.id}>
+                <td style={{ fontWeight: '600' }}>{s.name}</td>
+                <td>{s.alamat}</td>
+                <td><span className="badge">{s.kelas}</span></td>
+                <td style={{ textAlign: 'center' }}>
+                  <Link to={`/edit/${s.id}`} className="btn" style={{color: '#6366f1'}}>Edit</Link>
+                  <button className="btn btn-danger" onClick={() => dispatch(removeTodo({ id: s.id }))}>
+                    Hapus
                   </button>
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
-}
+};
+
+export default ListTodo;

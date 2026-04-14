@@ -1,40 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-let nextId = 1;
-
-const todoListSlice = createSlice({
-  name: "todoList",
-  initialState: [],
+const toDoSlice = createSlice({
+  name: 'siswa',
+  initialState: {
+    listSiswa: []
+  },
   reducers: {
+    // Action untuk tambah siswa (menerima name, alamat, kelas)
     addTodo: (state, action) => {
-      const { name, className, region } = action.payload;
-
-      state.push({
-        id: nextId++,
-        name,
-        class: className,
-        region
+      state.listSiswa.push({
+        id: Date.now(),
+        ...action.payload
       });
     },
-
+    // Action untuk hapus berdasarkan ID
     removeTodo: (state, action) => {
-      return state.filter(todo => todo.id !== action.payload.id);
+      state.listSiswa = state.listSiswa.filter(s => s.id !== action.payload.id);
     },
-
+    // Action untuk update data siswa
     updateTodo: (state, action) => {
-      const { id, name, className, region } = action.payload;
-      const todo = state.find(todo => todo.id === id);
-
-      if (todo) {
-        todo.name = name;
-        todo.class = className;
-        todo.region = region;
+      const index = state.listSiswa.findIndex(s => s.id === action.payload.id);
+      if (index !== -1) {
+        state.listSiswa[index] = action.payload;
       }
     }
   }
 });
 
-export const { addTodo, removeTodo, updateTodo } =
-  todoListSlice.actions;
-
-export default todoListSlice.reducer;
+export const { addTodo, removeTodo, updateTodo } = toDoSlice.actions;
+export default toDoSlice.reducer;
